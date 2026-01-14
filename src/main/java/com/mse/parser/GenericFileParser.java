@@ -22,7 +22,7 @@ public class GenericFileParser {
             throw new ReflectiveOperationException("FileSource not found");
         }
 
-        String delimeter = fileSource.delimeter();
+        String delimeter = fileSource.delimiter();
         List<T> list = new ArrayList<>();
 
 
@@ -48,14 +48,15 @@ public class GenericFileParser {
                         }
 
                         String value = parts[index];
+                        Object converted = convertToFieldType(value, field.getType());
 
                         field.setAccessible(true);
-                        field.set(object, value);
+                        field.set(object, converted);
                     }
                         list.add(object);
                 }
+                line = reader.readLine();
             }
-            line = reader.readLine();
         }
         return list;
     }

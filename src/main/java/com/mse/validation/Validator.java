@@ -1,9 +1,6 @@
 package com.mse.validation;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Validator {
 
@@ -17,9 +14,15 @@ public class Validator {
     public <T> Map<T, Set<String>> validate(List<T> objects) {
         Map<T, Set<String>> finalErrors = new HashMap<T, Set<String>>();
 
+        for(T object : objects) {
+            finalErrors.put(object, new HashSet<>());
+        }
+
         for (ValidationStrategy strategy : strategies) {
             Map<T, Set<String>> errors = strategy.validate(objects);
-            finalErrors.putAll(errors);
+            for(Map.Entry<T, Set<String>> entry : errors.entrySet()) {
+                finalErrors.get(entry.getKey()).addAll(entry.getValue());
+            }
         }
         return finalErrors;
     }

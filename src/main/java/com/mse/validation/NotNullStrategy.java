@@ -21,7 +21,7 @@ public class NotNullStrategy implements  ValidationStrategy {
                field.setAccessible(true);
                try{
                    Object value = field.get(object);
-                   if (value == null || (value instanceof String && ((String) value).isEmpty())){
+                   if (value == null || (value instanceof String && ((String) value).isBlank())){
                        errors.add(annotation.message());
                    }
                }catch(IllegalAccessException ignored){}

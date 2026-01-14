@@ -22,7 +22,7 @@ public class RegexStrategy implements ValidationStrategy {
                 field.setAccessible(true);
                 try{
                     Object value = field.get(object);
-                    if (value == null || !Pattern.matches(annotation.pattern(), value.toString())) {
+                    if (value == null || value.toString().isBlank() || !Pattern.matches(annotation.pattern(), value.toString())) {
 
                         errors.add(annotation.message());
                     }
