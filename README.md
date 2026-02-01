@@ -18,3 +18,5 @@ This builds the library and makes it addable to different projects.
         </dependency>
     </dependencies>
 ```
+###How to use
+Check repository ReflectiveDataEngineLibraryTest
